@@ -1,4 +1,4 @@
-package org.fage.springbootshiro.bean.dto;
+package org.fage.springbootshiro.config.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,16 +9,14 @@ import java.math.BigDecimal;
 /**
  * @author Caizhf
  * @version 1.0
- * @date 2019/6/3 16:29
+ * @date 2019/7/12 16:06
  * @description
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginInfo {
+public class UserSession {
     private BigDecimal dataId;
 
     private String username;
-
-    private String password;
 }

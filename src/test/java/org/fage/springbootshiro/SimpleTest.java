@@ -46,6 +46,7 @@ public class SimpleTest {
 
         //获取当前用户
         Subject subject = SecurityUtils.getSubject();
+        subject.isPermitted();
 
         //模拟用户输入账号密码登录
         UsernamePasswordToken token = new UsernamePasswordToken("fage", "123");

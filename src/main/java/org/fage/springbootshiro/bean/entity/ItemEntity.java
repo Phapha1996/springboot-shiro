@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "t_item")
 @Data
-public class Item {
+public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigDecimal dataId;
@@ -30,5 +30,8 @@ public class Item {
 
     //菜单描述
     private String description;
+
+    //过滤器
+    private String filter;
 
 }

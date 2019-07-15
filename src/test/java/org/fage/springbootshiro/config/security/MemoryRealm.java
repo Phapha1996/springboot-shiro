@@ -8,7 +8,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.fage.springbootshiro.bean.dto.UserLoginInfo;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
 @Configuration
 public class MemoryRealm extends AuthorizingRealm {
 
-    private List<UserLoginInfo> dbUserList;
+    private List<UserSession> dbUserList;
 
     {
         super.setName("memoryRealm");
@@ -45,7 +44,7 @@ public class MemoryRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = ((UserLoginInfo) principals.getPrimaryPrincipal()).getUsername();
+        String username = ((UserSession) principals.getPrimaryPrincipal()).getUsername();
         //模拟从数据库获取角色和权限
         Set<String> roles = getRolesByUserName(username);
         Set<String> permissions = getPermissionsByUserName(username);
@@ -91,17 +90,18 @@ public class MemoryRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //从传过来的认证信息获取用户名以及密码
         String username  = ((String)token.getPrincipal());
-        String password = token.getCredentials().getClass().getSimpleName();
+
         //获取用户名
         if(StringUtils.isEmpty(username)){
             return null;
         }
-        UserLoginInfo loginInfo = dbUserList.stream()
+        UserSession loginInfo = dbUserList.stream()
                 .filter(info -> info.getUsername().equals(username))
                 .collect(Collectors.toList())
                 .get(0);
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginInfo, loginInfo.getPassword(), "memoryRealm");
+//        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginInfo, loginInfo.getPassword(), "memoryRealm");
+        SimpleAuthenticationInfo authenticationInfo = null;
         return authenticationInfo;
     }
 

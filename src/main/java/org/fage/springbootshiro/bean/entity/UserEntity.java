@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "t_user")
 @Data
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigDecimal dataId;
@@ -31,6 +31,9 @@ public class User {
 
     //盐
     private String salt;
+
+    //状态
+    private String status;
 
    /* @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "t_user_role", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})

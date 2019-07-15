@@ -19,6 +19,7 @@ public enum ResponseEnum {
      */
     BUSI_FAILED_USER_LOGIN("0001", "登录失败，用户名或密码不正确"),
     BUSI_FAILED_USER_AUTH("0002", "登录失败，用户认证失败"),
+    BUSI_FAILED_USER_REG("0002", "注册失败"),
     BUSI_FAILED_USER_UNKNOWN("0999", "业务处理失败，原因未知"),
 
     //----------------系统处理失败：1001-1999错误代码产生的错误代码属于正常容错，不需要记录异常堆栈，但需要记录错误信息——ProcessException（success=false）----------------//
